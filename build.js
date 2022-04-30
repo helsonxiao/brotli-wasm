@@ -9,6 +9,12 @@ shell.rm('-rf', 'dist');
 shell.rm('-rf', 'pkg.*');
 shell.mkdir('dist');
 
+// Create the web output
+shell.rm('-rf', 'pkg');
+shell.exec('wasm-pack build --target web');
+shell.mv('pkg', 'pkg.web');
+shell.rm('pkg.web/{LICENSE,package.json,README.md,.gitignore}');
+
 // Create the bundler output
 shell.rm('-rf', 'pkg');
 shell.exec('wasm-pack build --target bundler');
